@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'telaJogos.dart';
 
 class TelaJogos extends StatelessWidget {
   const TelaJogos({super.key});
@@ -10,8 +8,12 @@ class TelaJogos extends StatelessWidget {
     return const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: ScaffoldMessenger(
-            child: Scaffold(
-          body: EstlFun(),
+          child: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(kToolbarHeight),
+              child: MyAppBar(),
+            ),
+            body: EstlFun(),
         )));
   }
 }
@@ -42,17 +44,6 @@ class _EstlFunState extends State<EstlFun> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 100,
-              ),
-              Text(
-                'Jogos',
-                style: TextStyle(
-                  fontSize: 50,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               SizedBox(
                 height: 100,
               ),
@@ -108,7 +99,7 @@ class _EstlFunState extends State<EstlFun> {
                             child: Image.asset(
                                 'assets/imagens/test_images/game.png'),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +134,7 @@ class _EstlFunState extends State<EstlFun> {
                             child: Image.asset(
                                 'assets/imagens/test_images/game.png'),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,7 +169,7 @@ class _EstlFunState extends State<EstlFun> {
                             child: Image.asset(
                                 'assets/imagens/test_images/game.png'),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,7 +204,7 @@ class _EstlFunState extends State<EstlFun> {
                             child: Image.asset(
                                 'assets/imagens/test_images/game.png'),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,7 +239,7 @@ class _EstlFunState extends State<EstlFun> {
                             child: Image.asset(
                                 'assets/imagens/test_images/game.png'),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,7 +274,7 @@ class _EstlFunState extends State<EstlFun> {
                             child: Image.asset(
                                 'assets/imagens/test_images/game.png'),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -318,7 +309,7 @@ class _EstlFunState extends State<EstlFun> {
                             child: Image.asset(
                                 'assets/imagens/test_images/game.png'),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(16.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,4 +344,18 @@ class _EstlFunState extends State<EstlFun> {
       ),
     );
   }
+}
+
+class MyAppBar extends StatelessWidget {
+  const MyAppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: const Text("Jogos"),
+      backgroundColor: Colors.greenAccent,
+
+    );
+  }
+
 }

@@ -65,7 +65,7 @@ class _EstlFunState extends State<EstlFun> {
           scale: 0.7,
         ),
       ),
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           SizedBox(height: 100, width: 100, child: CircularProgressIndicator()),
