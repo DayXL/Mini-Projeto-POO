@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'telaTeste.dart';
+import 'telaJogos.dart';
 
 late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
 

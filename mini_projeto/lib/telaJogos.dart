@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'telaTeste.dart';
+import 'telaJogos.dart';
 
 
 class TelaJogos extends StatelessWidget {
