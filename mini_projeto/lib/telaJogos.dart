@@ -37,41 +37,131 @@ class _EstlFunState extends State<EstlFun> {
           end: Alignment.bottomCenter,
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Jogos',
-            style: TextStyle(
-              fontSize: 50,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ListTile(
-                  leading: Image.asset(
-                    'assets/imagens/test_images/game.png',
-                    width: 500,
-                    height: 500,
-                  ),
-                  title: Text('Megaman Battle Network'),
-                  subtitle: Text('Joguinho legal'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => TelaJogos()),
-                    );
-                  },
+      child: ListView(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 100,
+              ),
+              Text(
+                'Jogos',
+                style: TextStyle(
+                  fontSize: 50,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              Container(
+                margin: EdgeInsets.all(16.0),
+                child: Card(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        width: 300,
+                        height: 300,
+                        child:
+                            Image.asset('assets/imagens/test_images/game.png'),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Megaman Battle Network Legacy Collection',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8.0),
+                            Text(
+                              'Joguinho do Megaman urruuu',
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(16.0),
+                child: Card(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        width: 300,
+                        height: 300,
+                        child:
+                            Image.asset('assets/imagens/test_images/game.png'),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Megaman Battle Network Legacy Collection',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8.0),
+                            Text(
+                              'Joguinho do Megaman urruuu',
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(16.0),
+                child: Card(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        width: 300,
+                        height: 300,
+                        child:
+                            Image.asset('assets/imagens/test_images/game.png'),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Megaman Battle Network Legacy Collection',
+                              style: TextStyle(
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8.0),
+                            Text(
+                              'Joguinho do Megaman urruuu',
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
