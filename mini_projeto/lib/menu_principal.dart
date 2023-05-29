@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'telaTeste.dart';
 
 late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
 
@@ -14,7 +16,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
 
   @override
 
@@ -40,8 +41,27 @@ class MyApp extends StatelessWidget {
 
 }
 
-class EstlFun extends StatelessWidget {
+class EstlFun extends StatefulWidget {
   const EstlFun({Key? key}) : super(key: key);
+
+  @override
+  _EstlFunState createState() => _EstlFunState();
+}
+
+class _EstlFunState extends State<EstlFun> {
+  @override
+  void initState() {
+    super.initState();
+    carregarTelaJogos();
+  }
+
+  Future<void> carregarTelaJogos() async {
+    await Future.delayed(const Duration(seconds: 5));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TelaJogos()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
