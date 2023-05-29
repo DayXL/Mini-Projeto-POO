@@ -60,7 +60,20 @@ class EstlFun extends StatelessWidget {
           scale: 0.7,
         ),
 
+
       ),
+
+      
+      child : Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: const [
+          SizedBox(
+            height: 100,
+            width: 100,
+            child: CircularProgressIndicator()),
+        ],
+      ),
+
     );
   }
 }
