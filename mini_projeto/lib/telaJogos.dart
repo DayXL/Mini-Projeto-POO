@@ -58,6 +58,10 @@ class _EstlFunState extends State<EstlFun> {
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -93,6 +97,10 @@ class _EstlFunState extends State<EstlFun> {
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -128,6 +136,10 @@ class _EstlFunState extends State<EstlFun> {
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -160,9 +172,14 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
+
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -195,9 +212,14 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
+
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -230,9 +252,14 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
+
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -265,9 +292,14 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
+
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -300,9 +332,14 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
+
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      
                       child: Column(
                         children: <Widget>[
                           SizedBox(
