@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'telaJogos.dart';
+import 'tela_jogos.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);

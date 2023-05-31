@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mini_projeto/components/loading.dart';
 
 class TelaJogos extends StatelessWidget {
   const TelaJogos({super.key});
