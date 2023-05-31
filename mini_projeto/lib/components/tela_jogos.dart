@@ -13,7 +13,7 @@ class TelaJogos extends StatelessWidget {
             preferredSize: Size.fromHeight(kToolbarHeight),
             child: MyAppBar(),
           ),
-          body: Loading(),
+          body: const Loading(),
           floatingActionButton: BotaoRecarregar(),
         )));
   }
@@ -27,7 +27,6 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  @override
   @override
   Widget build(BuildContext context) {
     return Container(

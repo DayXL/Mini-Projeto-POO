@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import './components/loading.dart';
 
 late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
