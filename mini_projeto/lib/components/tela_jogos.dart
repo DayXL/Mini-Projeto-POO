@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mini_projeto/services/game_services.dart';
 import './myappbar.dart';
 import './refresh_button.dart';
+
+final GameService gameService = GameService();
 
 class TelaJogos extends StatelessWidget {
   const TelaJogos({super.key});
@@ -25,10 +28,10 @@ class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
 
   @override
-  _LoadingState createState() => _LoadingState();
+  LoadingState createState() => LoadingState();
 }
 
-class _LoadingState extends State<Loading> {
+class LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Container(
