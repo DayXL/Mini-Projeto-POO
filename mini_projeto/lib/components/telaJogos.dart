@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_projeto/components/loading.dart';
 
 class TelaJogos extends StatelessWidget {
   const TelaJogos({super.key});
@@ -8,26 +9,25 @@ class TelaJogos extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: ScaffoldMessenger(
-          child: Scaffold(
-            appBar: const PreferredSize(
-              preferredSize: Size.fromHeight(kToolbarHeight),
-              child: MyAppBar(),
-            ),
-            body: EstlFun(),
-
-            floatingActionButton: BotaoRecarregar(),
+            child: Scaffold(
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: MyAppBar(),
+          ),
+          body: Loading(),
+          floatingActionButton: BotaoRecarregar(),
         )));
   }
 }
 
-class EstlFun extends StatefulWidget {
-  const EstlFun({Key? key}) : super(key: key);
+class Loading extends StatefulWidget {
+  const Loading({Key? key}) : super(key: key);
 
   @override
-  _EstlFunState createState() => _EstlFunState();
+  _LoadingState createState() => _LoadingState();
 }
 
-class _EstlFunState extends State<EstlFun> {
+class _LoadingState extends State<Loading> {
   @override
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,6 @@ class _EstlFunState extends State<EstlFun> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -100,7 +99,6 @@ class _EstlFunState extends State<EstlFun> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -139,7 +137,6 @@ class _EstlFunState extends State<EstlFun> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -172,14 +169,12 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
-
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -212,14 +207,12 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
-
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -252,14 +245,12 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
-
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -292,14 +283,12 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
-
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -332,14 +321,12 @@ class _EstlFunState extends State<EstlFun> {
                       ),
                     ),
                   ),
-
                   Container(
                     margin: EdgeInsets.all(16.0),
                     child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-
                       child: Column(
                         children: <Widget>[
                           SizedBox(
@@ -395,9 +382,7 @@ class MyAppBar extends StatelessWidget {
       backgroundColor: Colors.greenAccent,
       actions: [
         PopupMenuButton(
-          onSelected: (quantidade) {
-          },
-
+          onSelected: (quantidade) {},
           icon: const Icon(Icons.more_vert),
           itemBuilder: (context) {
             return criarPopupItens();
@@ -445,28 +430,24 @@ class MyAppBar extends StatelessWidget {
           title: Text('Plataforma'),
         ),
       ),
-
       PopupMenuItem(
         child: ListTile(
           leading: Icon(Icons.shutter_speed), // Ícone para Tiro
           title: Text('Tiro (FPS - First-Person Shooter)'),
         ),
       ),
-
       PopupMenuItem(
         child: ListTile(
           leading: Icon(Icons.sports_mma), // Ícone para Luta
           title: Text('Luta (Fighting)'),
         ),
       ),
-
       PopupMenuItem(
         child: ListTile(
           leading: Icon(Icons.sports_soccer), // Ícone para Esportes
           title: Text('Esportes'),
         ),
       ),
-      
       PopupMenuItem(
         child: ListTile(
           leading: Icon(Icons.directions_car), // Ícone para Corrida
@@ -533,11 +514,8 @@ class MyAppBar extends StatelessWidget {
           title: Text('Jogos de tabuleiro'),
         ),
       ),
-
-
     ];
   }
-
 }
 
 class BotaoRecarregar extends StatelessWidget {
@@ -547,10 +525,9 @@ class BotaoRecarregar extends StatelessWidget {
       onPressed: () {
         //Função de recarregar em breve
       },
-
       backgroundColor: Colors.greenAccent,
       elevation: 5.0,
-      shape: const CircleBorder(), 
+      shape: const CircleBorder(),
       child: Container(
         width: 80.0,
         height: 80.0,
@@ -559,11 +536,10 @@ class BotaoRecarregar extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               offset: Offset(0, 2),
-              blurRadius: 8.0, 
+              blurRadius: 8.0,
             ),
           ],
         ),
-
         child: const Center(
           child: Icon(
             Icons.refresh,
@@ -571,7 +547,6 @@ class BotaoRecarregar extends StatelessWidget {
           ),
         ),
       ),
-
     );
   }
 }
