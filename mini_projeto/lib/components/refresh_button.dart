@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mini_projeto/services/game_services.dart';
 import './tela_jogos.dart';
+import 'dart:math';
+
 
 class RefreshButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Random random = Random();
+
     return FloatingActionButton(
       onPressed: () {
-        numPagePad = numPagePad + 1;
+        numPagePad = random.nextInt(101);
         gameService.carregarJogos();
       },
 
