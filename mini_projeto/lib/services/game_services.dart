@@ -38,7 +38,6 @@ class GameService {
       tableStateNotifier.value = {
         'status': TableStatus.ready,
         'dataObjects': gameJson,
-        'columnNames': ["ID", "Nome", "released", "Background_image"], // Atualize esta linha
         'propertyNames': ["id", "name", "released", "background_image"]
       };
     });
@@ -49,11 +48,10 @@ class ConteudoCorpo extends StatelessWidget {
 
   final List jsonObjects;
 
-  final List<String> columnNames;
 
   final List<String> propertyNames;
 
-  ConteudoCorpo( {this.jsonObjects = const [], this.columnNames = const ["ID", "Nome", "released", "Background_image"], this.propertyNames= const ["name", "released", "background_image"]});
+  ConteudoCorpo( {this.jsonObjects = const [], this.propertyNames= const ["name", "released", "background_image"]});
 
   @override
   Widget build(BuildContext context) {

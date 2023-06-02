@@ -67,8 +67,6 @@ class TelaJogos extends StatelessWidget {
                       
                     propertyNames: value['propertyNames'], 
                       
-                    columnNames: value['columnNames'],
-                      
                   );
       
                 case TableStatus.error: 
@@ -91,11 +89,9 @@ class TelaJogos extends StatelessWidget {
 class Loading extends StatelessWidget {
   final List jsonObjects;
 
-  final List<String> columnNames;
-
   final List<String> propertyNames;
 
-  Loading( {this.jsonObjects = const [], this.columnNames = const ["ID", "Nome", "Added", "Image_background"], this.propertyNames= const ["name", "style", "image_background"]});
+  Loading( {this.jsonObjects = const [], this.propertyNames= const ["name", "style", "image_background"]});
 
   @override
   Widget build(BuildContext context) {
@@ -114,9 +110,7 @@ class Loading extends StatelessWidget {
         jsonObjects: jsonObjects, 
                         
         propertyNames: propertyNames, 
-                        
-        columnNames: columnNames,
-        
+                                
       ),
     );
   }
