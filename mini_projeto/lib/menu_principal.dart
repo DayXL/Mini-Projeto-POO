@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import './components/loading.dart';
 
-late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
 
 void main() {
-  _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
   MyApp app = const MyApp();
 
@@ -16,11 +14,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: ScaffoldMessenger(
-            key: _scaffoldMessengerKey,
-            child: const Scaffold(
+            child: Scaffold(
               body: Loading(),
             )));
   }

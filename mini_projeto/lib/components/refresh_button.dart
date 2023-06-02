@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mini_projeto/services/game_services.dart';
+import './tela_jogos.dart';
 
 class RefreshButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-        //Função de recarregar em breve
+        numPagePad = numPagePad + 1;
+        gameService.carregarJogos();
       },
+
       backgroundColor: Colors.greenAccent,
       elevation: 5.0,
       shape: const CircleBorder(),
