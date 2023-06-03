@@ -55,4 +55,22 @@ class GameService {
       'propertyNames': ['name', 'released', 'background_image']
     };
   }
+
+  void addFavorite(String name, String released, String image) {
+    favoriteStateNotifier.value = {
+      'status': ConnectionStatus.ready,
+      'dataObjects': [
+        {'name': name, 'released': released, 'background_image': image}
+      ],
+      'propertyNames': ['name', 'released', 'background_image']
+    };
+  }
+
+  void loadFavorite() {
+    favoriteStateNotifier.value = {
+      'status': ConnectionStatus.ready,
+      'dataObjects': [],
+      'propertyNames': ['name', 'released', 'background_image']
+    };
+  }
 }

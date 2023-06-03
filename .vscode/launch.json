@@ -9,7 +9,7 @@
             "cwd": "mini_projeto",
             "request": "launch",
             "type": "dart",
-            "program": "lib/menu_principal.dart"
+            "program": "lib/main.dart"
         },
         {
             "name": "mini_projeto (profile mode)",

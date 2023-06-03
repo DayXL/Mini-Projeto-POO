@@ -92,6 +92,16 @@ class ConteudoCorpo extends StatelessWidget {
                         text2,
                         style: const TextStyle(fontSize: 16.0),
                       ),
+                      //add to favorites
+                      IconButton(
+                        icon: const Icon(Icons.favorite_border),
+                        onPressed: () {
+                          gameService.addFavorite(
+                              jsonObject['name'],
+                              jsonObject['released'],
+                              jsonObject['background_image']);
+                        },
+                      ),
                     ],
                   ),
                 ),

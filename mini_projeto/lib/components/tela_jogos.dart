@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:mini_projeto/components/list_favorites.dart';
 import 'package:mini_projeto/services/game_services.dart';
-import './myappbar.dart';
+import '../layouts/myappbar.dart';
 import '../layouts/bottom_navbar.dart';
 import 'dart:math';
 
@@ -62,9 +63,17 @@ class TelaJogos extends HookWidget {
                       gameService: gameService,
                     );
                   })
-              : const Center(
-                  child: Text('Favoritos'),
-                ),
+              : selectedIndex.value == 1
+                  ? ValueListenableBuilder(
+                      valueListenable: gameService.favoriteStateNotifier,
+                      builder: (_, value, __) {
+                        return ListFavorites(
+                          jsonObjects: value['dataObjects'],
+                          propertyNames: value['propertyNames'],
+                          gameService: gameService,
+                        );
+                      })
+                  : Container(),
           bottomNavigationBar: MyBottomNavBar(
             itemSelectedCallback: (index) {
               selectedIndex.value = index;
