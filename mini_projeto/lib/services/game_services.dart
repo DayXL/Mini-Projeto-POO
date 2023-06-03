@@ -4,21 +4,32 @@ import 'dart:convert';
 import '../components/detalhes_jogos.dart';
 import '../services/connection_service.dart';
 
-enum ConnectionStatus { idle, loading, ready, error }
-
-int numPagePad = 0;
+enum ConnectionStatus { loading, ready, error }
 
 class GameService {
-  final ValueNotifier<Map<String, dynamic>> gameStateNotifier =
-      ValueNotifier({'status': ConnectionStatus.idle, 'dataObjects': []});
+  final ValueNotifier<Map<String, dynamic>> gameStateNotifier = ValueNotifier({
+    'status': ConnectionStatus.loading,
+    'dataObjects': [],
+    'propertyNames': []
+  });
 
   final ValueNotifier<Map<String, dynamic>> favoriteStateNotifier =
-      ValueNotifier({'status': ConnectionStatus.ready, 'dataObjects': []});
+      ValueNotifier({
+    'status': ConnectionStatus.ready,
+    'dataObjects': [],
+    'propertyNames': []
+  });
+
+  int numPagePad;
+
+  GameService(this.numPagePad);
 
   Future<void> carregarJogos() async {
-    bool isConected = await ConnectionService().isConected();
+    print('carregarJogos');
 
-    if (!isConected) {
+    bool isConnected = await ConnectionService().isConnected();
+
+    if (!isConnected) {
       gameStateNotifier.value = {
         'status': ConnectionStatus.error,
         'dataObjects': []
@@ -26,11 +37,6 @@ class GameService {
 
       return;
     }
-
-    gameStateNotifier.value = {
-      'status': ConnectionStatus.loading,
-      'dataObjects': [],
-    };
 
     var apiKey = '14e4419142c349faa4079c0243beb8f1';
 
@@ -41,26 +47,27 @@ class GameService {
       queryParameters: {'key': apiKey, 'size': '9', 'page': '$numPagePad'},
     );
 
-    http.read(gamesUri).then((jsonString) {
-      var gameJson = jsonDecode(jsonString)["results"];
+    var jsonString = await http.read(gamesUri);
+    var gamesJson = jsonDecode(jsonString);
 
-      gameStateNotifier.value = {
-        'status': ConnectionStatus.ready,
-        'dataObjects': gameJson,
-        'propertyNames': ["id", "name", "released", "background_image"]
-      };
-    });
+    gameStateNotifier.value = {
+      'status': ConnectionStatus.ready,
+      'dataObjects': gamesJson['results'],
+      'propertyNames': ['name', 'released', 'background_image']
+    };
   }
 }
 
 class ConteudoCorpo extends StatelessWidget {
   final List jsonObjects;
-
   final List<String> propertyNames;
+  final GameService gameService;
 
   const ConteudoCorpo(
-      {this.jsonObjects = const [],
-      this.propertyNames = const ["name", "released", "background_image"]});
+      {super.key,
+      this.jsonObjects = const [],
+      this.propertyNames = const ["name", "released", "background_image"],
+      required this.gameService});
 
   @override
   Widget build(BuildContext context) {

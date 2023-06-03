@@ -1,13 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mini_projeto/services/game_services.dart';
 import './myappbar.dart';
 import '../layouts/bottom_navbar.dart';
+import 'dart:math';
 
-final GameService gameService = GameService();
+final GameService gameService = GameService(Random().nextInt(1000));
 
-class TelaJogos extends StatelessWidget {
+class TelaJogos extends HookWidget {
   TelaJogos({super.key});
 
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
@@ -15,6 +15,13 @@ class TelaJogos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      gameService.carregarJogos();
+      return null;
+    }, []);
+
+    final selectedIndex = useState(0);
+
     return ScaffoldMessenger(
         key: _scaffoldMessengerKey,
         child: Scaffold(
@@ -22,84 +29,43 @@ class TelaJogos extends StatelessWidget {
             preferredSize: Size.fromHeight(kToolbarHeight),
             child: MyAppBar(),
           ),
-          body: ValueListenableBuilder(
-              valueListenable: gameService.gameStateNotifier,
-              builder: (_, value, __) {
-                switch (value['status']) {
-                  case ConnectionStatus.idle:
-                    return SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Center(
-                        child: Column(
-                          children: <Widget>[
-                            const SizedBox(height: 150),
-                            const Text(
-                              'Nenhum item selecionado',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
+          body: selectedIndex.value == 0
+              ? ValueListenableBuilder(
+                  valueListenable: gameService.gameStateNotifier,
+                  builder: (_, value, __) {
+                    if (value['status'] == ConnectionStatus.loading) {
+                      return Container(
+                          constraints: const BoxConstraints.expand(),
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.greenAccent, Colors.black],
+                              stops: [0.1, 0.3],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
                             ),
-                            const Text(
-                              'Selecione um item abaixo',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 80,
-                            ),
-                            SizedBox(
-                              height: 200,
-                              child: Image.asset(
-                                'assets/imagens/waiting.png',
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-
-                  case ConnectionStatus.loading:
-                    return Container(
-                        constraints: const BoxConstraints.expand(),
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.greenAccent, Colors.black],
-                            stops: [0.1, 0.3],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
                           ),
-                        ),
-                        child: const Center(
-                            child:
-                                SizedBox(child: CircularProgressIndicator())));
+                          child: const Center(
+                              child: SizedBox(
+                                  child: CircularProgressIndicator())));
+                    }
 
-                  case ConnectionStatus.ready:
+                    if (value['status'] == ConnectionStatus.error) {
+                      return const Center(
+                        child: Text('Erro ao carregar os dados'),
+                      );
+                    }
                     return Loading(
                       jsonObjects: value['dataObjects'],
                       propertyNames: value['propertyNames'],
+                      gameService: gameService,
                     );
-
-                  case ConnectionStatus.error:
-                    return const Text("Ops");
-                }
-
-                return const Text("...");
-              }),
+                  })
+              : const Center(
+                  child: Text('Favoritos'),
+                ),
           bottomNavigationBar: MyBottomNavBar(
             itemSelectedCallback: (index) {
-              if (index == 0) {
-                Random random = Random();
-                numPagePad = random.nextInt(101);
-                gameService.carregarJogos();
-              } else {
-                _scaffoldMessengerKey.currentState!.showSnackBar(
-                  const SnackBar(
-                    content: Text('Favoritos'),
-                  ),
-                );
-              }
+              selectedIndex.value = index;
             },
           ),
         ));
@@ -108,13 +74,14 @@ class TelaJogos extends StatelessWidget {
 
 class Loading extends StatelessWidget {
   final List jsonObjects;
-
   final List<String> propertyNames;
+  final GameService gameService;
 
   const Loading(
       {super.key,
       this.jsonObjects = const [],
-      this.propertyNames = const ["name", "style", "image_background"]});
+      this.propertyNames = const ["name", "style", "image_background"],
+      required this.gameService});
 
   @override
   Widget build(BuildContext context) {
@@ -131,6 +98,7 @@ class Loading extends StatelessWidget {
       child: ConteudoCorpo(
         jsonObjects: jsonObjects,
         propertyNames: propertyNames,
+        gameService: gameService,
       ),
     );
   }
