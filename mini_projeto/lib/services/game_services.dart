@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../components/detalhes_jogos.dart';
 
 enum TableStatus { idle, loading, ready, error }
 
@@ -69,11 +70,21 @@ class ConteudoCorpo extends StatelessWidget {
             ),
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  width: 300,
-                  height: 300,
-                  child: Image.network(imagem),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const DetalheJogos()),
+                    );
+                  },
+
+                  child: SizedBox(
+                    width: 300,
+                    height: 300,
+                    child: Image.network(imagem),
+                  ),
                 ),
+
                 Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Column(

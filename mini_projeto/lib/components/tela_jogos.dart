@@ -14,9 +14,7 @@ class TelaJogos extends StatelessWidget {
   Widget build(BuildContext context) {
   _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: ScaffoldMessenger(
+    return ScaffoldMessenger(
           key: _scaffoldMessengerKey,
           child: Scaffold(
           appBar: const PreferredSize(
@@ -82,7 +80,7 @@ class TelaJogos extends StatelessWidget {
           ),
           
           floatingActionButton: RefreshButton(),
-        )));
+        ));
   }
 }
 

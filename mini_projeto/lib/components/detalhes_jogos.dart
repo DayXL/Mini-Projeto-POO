@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TelaJogos extends StatelessWidget {
-  const TelaJogos({super.key});
+class DetalheJogos extends StatelessWidget {
+  const DetalheJogos({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: ScaffoldMessenger(
+    return const ScaffoldMessenger(
           child: Scaffold(
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(kToolbarHeight),
@@ -15,7 +13,7 @@ class TelaJogos extends StatelessWidget {
             ),
             body: EstlFun(),
 
-        )));
+        ));
   }
 }
 

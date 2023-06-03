@@ -26,26 +26,32 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.greenAccent, Colors.black],
-          stops: [0.1, 0.3],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+    return ScaffoldMessenger(
+          child: Scaffold(
+            body: Container(
+            constraints: const BoxConstraints.expand(),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.greenAccent, Colors.black],
+                stops: [0.1, 0.3],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+        
+              image: DecorationImage(
+                image: ExactAssetImage('assets/imagens/telaPrincipal.png'),
+                scale: 0.7,
+              ),
+              
+            ),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(height: 100, width: 100, child: CircularProgressIndicator()),
+              ],
+            ),
+          ),
         ),
-        image: DecorationImage(
-          image: ExactAssetImage('assets/imagens/telaPrincipal.png'),
-          scale: 0.7,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(height: 100, width: 100, child: CircularProgressIndicator()),
-        ],
-      ),
-    );
+     );
   }
 }

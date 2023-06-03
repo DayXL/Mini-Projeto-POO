@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './components/loading.dart';
-
+import 'package:mini_projeto/components/tela_jogos.dart';
+import 'components/detalhes_jogos.dart';
 
 void main() {
 
@@ -14,11 +14,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: ScaffoldMessenger(
-            child: Scaffold(
-              body: Loading(),
-            )));
+        initialRoute: 'principal',
+
+        routes: {
+          'principal': (context) => const TelaJogos(),
+          'detalhesJogos': (context) => const DetalheJogos(),
+
+        },
+        );
   }
 }
