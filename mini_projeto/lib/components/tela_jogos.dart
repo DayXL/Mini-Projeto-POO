@@ -5,6 +5,8 @@ import './myappbar.dart';
 import '../layouts/bottom_navbar.dart';
 import 'dart:math';
 
+import 'list_games.dart';
+
 final GameService gameService = GameService(Random().nextInt(1000));
 
 class TelaJogos extends HookWidget {
@@ -54,7 +56,7 @@ class TelaJogos extends HookWidget {
                         child: Text('Erro ao carregar os dados'),
                       );
                     }
-                    return Loading(
+                    return LoadGameList(
                       jsonObjects: value['dataObjects'],
                       propertyNames: value['propertyNames'],
                       gameService: gameService,
@@ -69,37 +71,5 @@ class TelaJogos extends HookWidget {
             },
           ),
         ));
-  }
-}
-
-class Loading extends StatelessWidget {
-  final List jsonObjects;
-  final List<String> propertyNames;
-  final GameService gameService;
-
-  const Loading(
-      {super.key,
-      this.jsonObjects = const [],
-      this.propertyNames = const ["name", "style", "image_background"],
-      required this.gameService});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints.expand(),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.greenAccent, Colors.black],
-          stops: [0.1, 0.3],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: ConteudoCorpo(
-        jsonObjects: jsonObjects,
-        propertyNames: propertyNames,
-        gameService: gameService,
-      ),
-    );
   }
 }
