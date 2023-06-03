@@ -112,8 +112,9 @@ class Loading extends StatelessWidget {
 
   final List<String> propertyNames;
 
-  Loading(
-      {this.jsonObjects = const [],
+  const Loading(
+      {super.key,
+      this.jsonObjects = const [],
       this.propertyNames = const ["name", "style", "image_background"]});
 
   @override
