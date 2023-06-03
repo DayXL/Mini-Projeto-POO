@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/imagens/telaPrincipal.png
     - assets/imagens/test_images/game.png
+    - assets/imagens/waiting.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mini_projeto/services/game_services.dart';
 import './myappbar.dart';
-import './refresh_button.dart';
 import '../layouts/bottom_navbar.dart';
 
 late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
@@ -29,15 +28,34 @@ class TelaJogos extends StatelessWidget {
               builder: (_, value, __) {
                 switch (value['status']) {
                   case ConnectionStatus.idle:
-                    return const SingleChildScrollView(
+                    return SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Center(
                         child: Column(
-                          children: [
-                            Text(
-                                ' 1 - Para gerar uma tabela, seleciona algum botão abaixo',
-                                style: TextStyle(
-                                    fontStyle: FontStyle.italic, fontSize: 15)),
+                          children: <Widget>[
+                            const SizedBox(height: 150),
+                            const Text(
+                              'Nenhum item selecionado',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                            const Text(
+                              'Selecione um item abaixo',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 80,
+                            ),
+                            SizedBox(
+                              height: 200,
+                              child: Image.asset(
+                                'assets/imagens/waiting.png',
+                                fit: BoxFit.cover,
+                              ),
+                            )
                           ],
                         ),
                       ),
