@@ -2,42 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../components/detalhes_jogos.dart';
+import '../services/connection_service.dart';
 
-enum TableStatus { idle, loading, ready, error }
+enum ConnectionStatus { idle, loading, ready, error }
 
 int numPagePad = 0;
 
 class GameService {
-  final ValueNotifier<Map<String,dynamic>> tableStateNotifier = ValueNotifier({
-    'status': TableStatus.idle,
+  final ValueNotifier<Map<String, dynamic>> gameStateNotifier =
+      ValueNotifier({'status': ConnectionStatus.idle, 'dataObjects': []});
 
-    'dataObjects':[]
+  final ValueNotifier<Map<String, dynamic>> favoriteStateNotifier =
+      ValueNotifier({'status': ConnectionStatus.ready, 'dataObjects': []});
 
-  });
+  Future<void> carregarJogos() async {
+    bool isConected = await ConnectionService().isConected();
 
-  void carregarJogos() {
-    tableStateNotifier.value = {
+    if (!isConected) {
+      gameStateNotifier.value = {
+        'status': ConnectionStatus.error,
+        'dataObjects': []
+      };
 
-      'status': TableStatus.loading,
+      return;
+    }
+
+    gameStateNotifier.value = {
+      'status': ConnectionStatus.loading,
       'dataObjects': [],
-
     };
 
-    
     var apiKey = '14e4419142c349faa4079c0243beb8f1';
 
     var gamesUri = Uri(
       scheme: 'https',
       host: 'api.rawg.io',
       path: 'api/games',
-      queryParameters: {'key': apiKey, 'size' : '9', 'page': '$numPagePad'},
+      queryParameters: {'key': apiKey, 'size': '9', 'page': '$numPagePad'},
     );
 
     http.read(gamesUri).then((jsonString) {
       var gameJson = jsonDecode(jsonString)["results"];
 
-      tableStateNotifier.value = {
-        'status': TableStatus.ready,
+      gameStateNotifier.value = {
+        'status': ConnectionStatus.ready,
         'dataObjects': gameJson,
         'propertyNames': ["id", "name", "released", "background_image"]
       };
@@ -46,13 +54,13 @@ class GameService {
 }
 
 class ConteudoCorpo extends StatelessWidget {
-
   final List jsonObjects;
-
 
   final List<String> propertyNames;
 
-  ConteudoCorpo( {this.jsonObjects = const [], this.propertyNames= const ["name", "released", "background_image"]});
+  const ConteudoCorpo(
+      {this.jsonObjects = const [],
+      this.propertyNames = const ["name", "released", "background_image"]});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +71,7 @@ class ConteudoCorpo extends StatelessWidget {
         final text2 = jsonObject['released'];
 
         return Container(
-          margin: EdgeInsets.all(16.0),
+          margin: const EdgeInsets.all(16.0),
           child: Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
@@ -74,19 +82,18 @@ class ConteudoCorpo extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const DetalheJogos()),
+                      MaterialPageRoute(
+                          builder: (context) => const DetalheJogos()),
                     );
                   },
-
                   child: SizedBox(
                     width: 300,
                     height: 300,
                     child: Image.network(imagem),
                   ),
                 ),
-
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -100,7 +107,7 @@ class ConteudoCorpo extends StatelessWidget {
                       const SizedBox(height: 8.0),
                       Text(
                         text2,
-                        style: TextStyle(fontSize: 16.0),
+                        style: const TextStyle(fontSize: 16.0),
                       ),
                     ],
                   ),
@@ -110,8 +117,6 @@ class ConteudoCorpo extends StatelessWidget {
           ),
         );
       }).toList(),
-
     );
   }
-
 }
