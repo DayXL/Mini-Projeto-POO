@@ -16,7 +16,7 @@ class LoadAppState extends State<LoadApp> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const TelaJogos()),
+        MaterialPageRoute(builder: (context) => TelaJogos()),
       );
     });
   }

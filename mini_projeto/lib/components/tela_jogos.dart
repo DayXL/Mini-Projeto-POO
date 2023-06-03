@@ -5,17 +5,16 @@ import 'package:mini_projeto/services/game_services.dart';
 import './myappbar.dart';
 import '../layouts/bottom_navbar.dart';
 
-late final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey;
-
 final GameService gameService = GameService();
 
 class TelaJogos extends StatelessWidget {
-  const TelaJogos({super.key});
+  TelaJogos({super.key});
+
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
-    _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-
     return ScaffoldMessenger(
         key: _scaffoldMessengerKey,
         child: Scaffold(

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'principal',
       routes: {
         'principal': (context) => const LoadApp(),
-        'telaJogos': (context) => const TelaJogos(),
+        'telaJogos': (context) => TelaJogos(),
         'detalhesJogos': (context) => const DetalheJogos(),
       },
     );
