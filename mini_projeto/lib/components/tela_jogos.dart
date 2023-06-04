@@ -4,7 +4,6 @@ import 'package:mini_projeto/components/list_favorites.dart';
 import 'package:mini_projeto/services/game_services.dart';
 import '../layouts/myappbar.dart';
 import '../layouts/bottom_navbar.dart';
-
 import 'list_games.dart';
 
 final GameService gameService = GameService();
@@ -76,7 +75,6 @@ class TelaJogos extends HookWidget {
           bottomNavigationBar: MyBottomNavBar(
             itemSelectedCallback: (index) {
               selectedIndex.value = index;
-
             },
           ),
         ));

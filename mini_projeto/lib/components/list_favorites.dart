@@ -18,10 +18,8 @@ class ListFavorites extends HookWidget {
     return jsonObjects.isEmpty
         ? Center(
             child: Column(
-              
               children: <Widget>[
-                const Flexible(child: const SizedBox(height: 150)),
-
+                const Flexible(child: SizedBox(height: 150)),
                 const Flexible(
                   child: Text(
                     'Você ainda não adicionou',
@@ -30,8 +28,7 @@ class ListFavorites extends HookWidget {
                     ),
                   ),
                 ),
-
-                 const Flexible(
+                const Flexible(
                   child: Text(
                     'nenhum favorito',
                     style: TextStyle(
@@ -39,13 +36,11 @@ class ListFavorites extends HookWidget {
                     ),
                   ),
                 ),
-
                 const Flexible(
                   child: SizedBox(
                     height: 80,
                   ),
                 ),
-
                 Expanded(
                   child: SizedBox(
                     height: 200,
@@ -56,7 +51,6 @@ class ListFavorites extends HookWidget {
                   ),
                 )
               ],
-
             ),
           )
         : ListView(children: <Widget>[

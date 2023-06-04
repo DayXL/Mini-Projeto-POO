@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../components/tela_jogos.dart';
 import 'dart:convert';
 import 'dart:math';
@@ -12,13 +13,19 @@ class MyAppBar extends StatelessWidget {
       title: const Text("Jogos"),
       backgroundColor: Colors.greenAccent,
       actions: [
-         IconButton(
+        GestureDetector(
+          onTap: () => launchUrlString('https://rawg.io/apidocs'),
+          child: const Padding(
+              padding: EdgeInsets.only(top: 19, right: 16),
+              child:
+                  Text("Explorar Rawg.io API", style: TextStyle(fontSize: 16))),
+        ),
+        IconButton(
           icon: const Icon(Icons.refresh),
           onPressed: () {
             gameService.carregarJogos(Random().nextInt(101));
           },
         ),
-
         PopupMenuButton(
           onSelected: gameService.mudarGenero,
           icon: const Icon(Icons.more_vert),
@@ -37,22 +44,18 @@ class MyAppBar extends StatelessWidget {
       String name = genre['name'];
       int id = genre['id'];
 
-      // Get the index for the current genre
       int iconIndex = genres.indexOf(genre);
-
-      // Check if the iconIndex is valid
       Icon? icon;
+
       if (iconIndex >= 0 && iconIndex < icons.length) {
         icon = Icon(icons[iconIndex]);
       }
 
-      // Create the ListTile
       ListTile listTile = ListTile(
         leading: icon,
         title: Text(name),
       );
 
-      // Create the PopupMenuItem
       PopupMenuItem<int> menuItem = PopupMenuItem<int>(
         value: id,
         child: listTile,
@@ -149,20 +152,20 @@ String generosJogos = '''
 ''';
 
 const List<IconData> generosIcons = [
-  Icons.directions_run,   // Action
-  Icons.emoji_objects,    // Indie
-  Icons.explore,          // Adventure
-  Icons.flag,     // RPG
-  Icons.leaderboard,            // Strategy
-  Icons.bolt,             // Shooter
-  Icons.child_care,       // Casual
-  Icons.spa,        // Simulation
-  Icons.extension,        // Puzzle
-  Icons.gamepad,          // Arcade
-  Icons.format_paint,     // Platformer
-  Icons.public,           // Massively Multiplayer
-  Icons.directions_car,   // Racing
-  Icons.sports_soccer,    // Sports
-  Icons.fitness_center,   // Fighting
-  Icons.family_restroom,  // Family
+  Icons.directions_run, // Action
+  Icons.emoji_objects, // Indie
+  Icons.explore, // Adventure
+  Icons.flag, // RPG
+  Icons.leaderboard, // Strategy
+  Icons.bolt, // Shooter
+  Icons.child_care, // Casual
+  Icons.spa, // Simulation
+  Icons.extension, // Puzzle
+  Icons.gamepad, // Arcade
+  Icons.format_paint, // Platformer
+  Icons.public, // Massively Multiplayer
+  Icons.directions_car, // Racing
+  Icons.sports_soccer, // Sports
+  Icons.fitness_center, // Fighting
+  Icons.family_restroom, // Family
 ];
