@@ -49,9 +49,9 @@ class ConteudoCorpo extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: jsonObjects.map((jsonObject) {
-        final text1 = jsonObject['name'];
-        final imagem = jsonObject['background_image'];
-        final text2 = jsonObject['released'];
+        final String text1 = jsonObject['name'] ?? '';
+        final String imagem = jsonObject['background_image'] ?? '';
+        final String text2 = jsonObject['released'] ?? '';
 
         return Container(
           margin: const EdgeInsets.all(16.0),

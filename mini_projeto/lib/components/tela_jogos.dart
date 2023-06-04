@@ -21,7 +21,7 @@ class TelaJogos extends HookWidget {
     useEffect(() {
       gameService.carregarJogos();
       return null;
-    }, []);
+    });
 
     final selectedIndex = useState(0);
 
