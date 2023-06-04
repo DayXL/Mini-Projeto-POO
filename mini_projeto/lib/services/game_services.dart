@@ -57,19 +57,17 @@ class GameService {
   }
 
   void addFavorite(String name, String released, String image) {
-    favoriteStateNotifier.value = {
-      'status': ConnectionStatus.ready,
-      'dataObjects': [
-        {'name': name, 'released': released, 'background_image': image}
-      ],
-      'propertyNames': ['name', 'released', 'background_image']
-    };
-  }
+    final List<Map<String, dynamic>> favorites =
+        List.from(favoriteStateNotifier.value['dataObjects']);
+    favorites.add({
+      'name': name,
+      'released': released,
+      'background_image': image,
+    });
 
-  void loadFavorite() {
     favoriteStateNotifier.value = {
       'status': ConnectionStatus.ready,
-      'dataObjects': [],
+      'dataObjects': favorites,
       'propertyNames': ['name', 'released', 'background_image']
     };
   }
