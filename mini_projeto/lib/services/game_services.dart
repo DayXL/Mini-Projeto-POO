@@ -21,6 +21,7 @@ class GameService {
   });
 
   int numPagePad;
+  String generoJogo = '';
 
   GameService(this.numPagePad);
 
@@ -44,7 +45,9 @@ class GameService {
       scheme: 'https',
       host: 'api.rawg.io',
       path: 'api/games',
-      queryParameters: {'key': apiKey, 'size': '9', 'page': '$numPagePad'},
+      queryParameters: {'key': apiKey, 'size': '9', 'page': '$numPagePad', 
+      if (generoJogo.isNotEmpty) 
+        'genres': generoJogo,},
     );
 
     var jsonString = await http.read(gamesUri);
@@ -71,5 +74,11 @@ class GameService {
       'dataObjects': favorites,
       'propertyNames': ['name', 'released', 'background_image']
     };
+  }
+
+  void mudarGenero(int genreId) {
+    print(genreId);
+    generoJogo = '$genreId';
+    carregarJogos();
   }
 }

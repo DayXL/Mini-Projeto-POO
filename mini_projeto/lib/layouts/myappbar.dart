@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../components/tela_jogos.dart';
+import 'dart:convert';
 
 class MyAppBar extends StatelessWidget {
   const MyAppBar({Key? key}) : super(key: key);
@@ -10,138 +12,149 @@ class MyAppBar extends StatelessWidget {
       backgroundColor: Colors.greenAccent,
       actions: [
         PopupMenuButton(
-          onSelected: (quantidade) {},
+          onSelected: gameService.mudarGenero,
           icon: const Icon(Icons.more_vert),
           itemBuilder: (context) {
-            return criarPopupItens();
+            return criarPopupItens(generosJogos, generosIcons);
           },
         )
       ],
     );
   }
 
-  criarPopupItens() {
-    return const [
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.sports_kabaddi), // Ícone para Ação
-          title: Text('Ação'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.explore), // Ícone para Aventura
-          title: Text('Aventura'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.menu_book), // Ícone para RPG
-          title: Text('RPG (Role-Playing Game)'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.lightbulb), // Ícone para Estratégia
-          title: Text('Estratégia'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.extension), // Ícone para Quebra-cabeça
-          title: Text('Quebra-cabeça'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.directions_run), // Ícone para Plataforma
-          title: Text('Plataforma'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.shutter_speed), // Ícone para Tiro
-          title: Text('Tiro (FPS - First-Person Shooter)'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.sports_mma), // Ícone para Luta
-          title: Text('Luta (Fighting)'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.sports_soccer), // Ícone para Esportes
-          title: Text('Esportes'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.directions_car), // Ícone para Corrida
-          title: Text('Corrida'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.build), // Ícone para Simulação
-          title: Text('Simulação'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.warning), // Ícone para Sobrevivência
-          title: Text('Sobrevivência (Survival)'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.nightlight_round), // Ícone para Terror
-          title: Text('Terror (Horror)'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.public), // Ícone para Mundo aberto
-          title: Text('Mundo aberto (Open-world)'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.group), // Ícone para MMO
-          title: Text('MMO (Massively Multiplayer Online)'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.deck), // Ícone para Cartas
-          title: Text('Cartas'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.music_note), // Ícone para Música
-          title: Text('Música'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.gamepad), // Ícone para Arcade
-          title: Text('Arcade'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.timer), // Ícone para Estratégia em tempo real
-          title: Text('Estratégia em tempo real (RTS - Real-Time Strategy)'),
-        ),
-      ),
-      PopupMenuItem(
-        child: ListTile(
-          leading: Icon(Icons.casino), // Ícone para Jogos de tabuleiro
-          title: Text('Jogos de tabuleiro'),
-        ),
-      ),
-    ];
+  List<PopupMenuItem<int>> criarPopupItens(String json, List<IconData> icons) {
+    List<dynamic> genres = jsonDecode(json);
+
+    return genres.map((genre) {
+      String name = genre['name'];
+      int id = genre['id'];
+
+      // Get the index for the current genre
+      int iconIndex = genres.indexOf(genre);
+
+      // Check if the iconIndex is valid
+      Icon? icon;
+      if (iconIndex >= 0 && iconIndex < icons.length) {
+        icon = Icon(icons[iconIndex]);
+      }
+
+      // Create the ListTile
+      ListTile listTile = ListTile(
+        leading: icon,
+        title: Text(name),
+      );
+
+      // Create the PopupMenuItem
+      PopupMenuItem<int> menuItem = PopupMenuItem<int>(
+        value: id,
+        child: listTile,
+      );
+
+      return menuItem;
+    }).toList();
   }
 }
+
+String generosJogos = '''
+[
+    {
+      "id": 4,
+      "name": "Action",
+      "icon": "icons/action.png"
+    },
+    {
+      "id": 51,
+      "name": "Indie",
+      "icon": "icons/indie.png"
+    },
+    {
+      "id": 3,
+      "name": "Adventure",
+      "icon": "icons/adventure.png"
+    },
+    {
+      "id": 5,
+      "name": "RPG",
+      "icon": "icons/rpg.png"
+    },
+    {
+      "id": 10,
+      "name": "Strategy",
+      "icon": "icons/strategy.png"
+    },
+    {
+      "id": 2,
+      "name": "Shooter",
+      "icon": "icons/shooter.png"
+    },
+    {
+      "id": 40,
+      "name": "Casual",
+      "icon": "icons/casual.png"
+    },
+    {
+      "id": 14,
+      "name": "Simulation",
+      "icon": "icons/simulation.png"
+    },
+    {
+      "id": 7,
+      "name": "Puzzle",
+      "icon": "icons/puzzle.png"
+    },
+    {
+      "id": 11,
+      "name": "Arcade",
+      "icon": "icons/arcade.png"
+    },
+    {
+      "id": 83,
+      "name": "Platformer",
+      "icon": "icons/platformer.png"
+    },
+    {
+      "id": 59,
+      "name": "Massively Multiplayer",
+      "icon": "icons/mmo.png"
+    },
+    {
+      "id": 1,
+      "name": "Racing",
+      "icon": "icons/racing.png"
+    },
+    {
+      "id": 15,
+      "name": "Sports",
+      "icon": "icons/sports.png"
+    },
+    {
+      "id": 6,
+      "name": "Fighting",
+      "icon": "icons/fighting.png"
+    },
+    {
+      "id": 19,
+      "name": "Family",
+      "icon": "icons/family.png"
+    }
+]
+''';
+
+const List<IconData> generosIcons = [
+  Icons.directions_run,   // Action
+  Icons.emoji_objects,    // Indie
+  Icons.explore,          // Adventure
+  Icons.flag,     // RPG
+  Icons.leaderboard,            // Strategy
+  Icons.bolt,             // Shooter
+  Icons.child_care,       // Casual
+  Icons.spa,        // Simulation
+  Icons.extension,        // Puzzle
+  Icons.gamepad,          // Arcade
+  Icons.format_paint,     // Platformer
+  Icons.public,           // Massively Multiplayer
+  Icons.directions_car,   // Racing
+  Icons.sports_soccer,    // Sports
+  Icons.fitness_center,   // Fighting
+  Icons.family_restroom,  // Family
+];
