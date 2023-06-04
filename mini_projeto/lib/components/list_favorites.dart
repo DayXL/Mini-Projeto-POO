@@ -18,19 +18,19 @@ class ListFavorites extends HookWidget {
     return jsonObjects.isEmpty
         ? const Center(
             child: Text("Você ainda não adicionou nenhum favorito",
-                style: TextStyle(fontSize: 20, color: Colors.white)),
+                style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 15, 15, 15))),
           )
         : ListView(children: <Widget>[
             const SizedBox(height: 20),
             const Center(
               child: Text("Lista de Favoritos",
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
+                  style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0))),
             ),
             const SizedBox(height: 20),
             jsonObjects.isEmpty
                 ? const Center(
                     child: Text("Você ainda não adicionou nenhum favorito",
-                        style: TextStyle(fontSize: 20, color: Colors.white)),
+                        style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0))),
                   )
                 : Column(
                     children: jsonObjects.map(

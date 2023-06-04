@@ -17,7 +17,7 @@ class GameService {
       ValueNotifier({
     'status': ConnectionStatus.ready,
     'dataObjects': [],
-    'propertyNames': []
+    'propertyNames': ["name", "released", "background_image"]
   });
 
   int numPagePad;
