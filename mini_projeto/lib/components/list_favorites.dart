@@ -18,31 +18,45 @@ class ListFavorites extends HookWidget {
     return jsonObjects.isEmpty
         ? Center(
             child: Column(
+              
               children: <Widget>[
-                const SizedBox(height: 150),
-                const Text(
-                  'Você ainda não adicionou',
-                  style: TextStyle(
-                    fontSize: 20,
+                const Flexible(child: const SizedBox(height: 150)),
+
+                const Flexible(
+                  child: Text(
+                    'Você ainda não adicionou',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
-                const Text(
-                  'nenhum favorito',
-                  style: TextStyle(
-                    fontSize: 20,
+
+                 const Flexible(
+                  child: Text(
+                    'nenhum favorito',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 80,
+
+                const Flexible(
+                  child: SizedBox(
+                    height: 80,
+                  ),
                 ),
-                SizedBox(
-                  height: 200,
-                  child: Image.asset(
-                    'assets/imagens/waiting.png',
-                    fit: BoxFit.cover,
+
+                Expanded(
+                  child: SizedBox(
+                    height: 200,
+                    child: Image.asset(
+                      'assets/imagens/waiting.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 )
               ],
+
             ),
           )
         : ListView(children: <Widget>[
