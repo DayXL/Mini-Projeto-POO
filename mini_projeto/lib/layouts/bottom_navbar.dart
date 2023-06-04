@@ -18,8 +18,8 @@ class MyBottomNavBar extends HookWidget {
     return BottomNavigationBar(
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.refresh),
-          label: 'Recarregar',
+          icon: Icon(Icons.gamepad),
+          label: 'Jogos',
         ),
         BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favoritos'),
       ],

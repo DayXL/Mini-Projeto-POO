@@ -4,11 +4,10 @@ import 'package:mini_projeto/components/list_favorites.dart';
 import 'package:mini_projeto/services/game_services.dart';
 import '../layouts/myappbar.dart';
 import '../layouts/bottom_navbar.dart';
-import 'dart:math';
 
 import 'list_games.dart';
 
-final GameService gameService = GameService(Random().nextInt(101));
+final GameService gameService = GameService();
 
 class TelaJogos extends HookWidget {
   TelaJogos({super.key});
@@ -19,7 +18,7 @@ class TelaJogos extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      gameService.carregarJogos();
+      gameService.carregarJogos(gameService.numPagePad);
       return null;
     });
 
@@ -77,9 +76,7 @@ class TelaJogos extends HookWidget {
           bottomNavigationBar: MyBottomNavBar(
             itemSelectedCallback: (index) {
               selectedIndex.value = index;
-              if (index == 0) {
-                gameService.carregarJogos();
-              }
+
             },
           ),
         ));

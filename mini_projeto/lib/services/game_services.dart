@@ -20,13 +20,11 @@ class GameService {
     'propertyNames': ["name", "released", "background_image"]
   });
 
-  int numPagePad;
+  int numPagePad = 1;
   String generoJogo = '';
 
-  GameService(this.numPagePad);
-
-  Future<void> carregarJogos() async {
-    numPagePad = Random().nextInt(101);
+  Future<void> carregarJogos(int valor) async {
+    numPagePad = valor;
 
     bool isConnected = await ConnectionService().isConnected();
 
@@ -100,6 +98,6 @@ class GameService {
 
   void mudarGenero(int genreId) {
     generoJogo = '$genreId';
-    carregarJogos();
+    carregarJogos(Random().nextInt(101));
   }
 }

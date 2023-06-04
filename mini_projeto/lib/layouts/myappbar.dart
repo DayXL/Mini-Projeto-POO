@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/tela_jogos.dart';
 import 'dart:convert';
+import 'dart:math';
 
 class MyAppBar extends StatelessWidget {
   const MyAppBar({Key? key}) : super(key: key);
@@ -11,6 +12,13 @@ class MyAppBar extends StatelessWidget {
       title: const Text("Jogos"),
       backgroundColor: Colors.greenAccent,
       actions: [
+         IconButton(
+          icon: const Icon(Icons.refresh),
+          onPressed: () {
+            gameService.carregarJogos(Random().nextInt(101));
+          },
+        ),
+
         PopupMenuButton(
           onSelected: gameService.mudarGenero,
           icon: const Icon(Icons.more_vert),
