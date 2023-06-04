@@ -47,7 +47,7 @@ class _EstlFunState extends State<EstlFun> {
                 Expanded(
                   flex: 4,
                   child: Container(
-                    margin: EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.all(15.0),
                     child: Stack(
                       children: [
                         Image.asset('assets/imagens/test_images/game.png'),
@@ -69,7 +69,7 @@ class _EstlFunState extends State<EstlFun> {
                   flex: 6,
                   child: Card(
                     child: Container(
-                      margin: EdgeInsets.all(15.0),
+                      margin: const EdgeInsets.all(15.0),
                       child: const Text(
                         'Megaman Battle Network Legacy Collection A renomada série Mega Man Battle Network, que se expandiu para anime e quadrinhos, está de volta em Mega Man Battle Network Legacy Collection. Este pacote inclui dez jogos cheios de ação, além de novidades adicionais como uma galeria de ilustrações e música! Além disso, tem suporte a jogo online!',
                         style: TextStyle(
@@ -93,7 +93,7 @@ class _EstlFunState extends State<EstlFun> {
 
             child: Card(
               child: Container(
-                margin: EdgeInsets.all(16.0),
+                margin: const EdgeInsets.all(16.0),
                 child: const Text(
                   'Megaman Battle Network Legacy Collection A renomada série Mega Man Battle Network, que se expandiu para anime e quadrinhos, está de volta em Mega Man Battle Network Legacy Collection. Este pacote inclui dez jogos cheios de ação, além de novidades adicionais como uma galeria de ilustrações e música! Além disso, tem suporte a jogo online! A renomada série Mega Man Battle Network, que se expandiu para anime e quadrinhos, está de volta em Mega Man Battle Network Legacy Collection. Este pacote inclui dez jogos cheios de ação, além de novidades adicionais como uma galeria de ilustrações e música! Além disso, tem suporte a jogo online!',
                   style: TextStyle(

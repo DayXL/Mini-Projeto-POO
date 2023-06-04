@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import '../services/game_services.dart';
 import 'detalhes_jogos.dart';
 
@@ -34,7 +35,7 @@ class LoadGameList extends StatelessWidget {
   }
 }
 
-class ConteudoCorpo extends StatelessWidget {
+class ConteudoCorpo extends HookWidget {
   final List jsonObjects;
   final List<String> propertyNames;
   final GameService gameService;
@@ -94,14 +95,16 @@ class ConteudoCorpo extends StatelessWidget {
                       ),
                       //add to favorites
                       IconButton(
-                        icon: const Icon(Icons.favorite_border),
-                        onPressed: () {
-                          gameService.addFavorite(
-                              jsonObject['name'],
-                              jsonObject['released'],
-                              jsonObject['background_image']);
-                        },
-                      ),
+                          icon: Icon(Icons.favorite_border,
+                              color: gameService.isFavorite(jsonObject['name'])
+                                  ? Colors.red
+                                  : Colors.grey),
+                          onPressed: () {
+                            gameService.isFavorite(jsonObject['name'])
+                                ? gameService.removeFavorite(jsonObject['name'])
+                                : gameService.addFavorite(jsonObject['name'],
+                                    jsonObject['released'], imagem);
+                          }),
                     ],
                   ),
                 ),
