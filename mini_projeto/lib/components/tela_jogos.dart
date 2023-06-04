@@ -74,14 +74,12 @@ class TelaJogos extends HookWidget {
                         );
                       })
                   : Container(),
-
           bottomNavigationBar: MyBottomNavBar(
             itemSelectedCallback: (index) {
               selectedIndex.value = index;
               if (index == 0) {
                 gameService.carregarJogos();
               }
-              
             },
           ),
         ));

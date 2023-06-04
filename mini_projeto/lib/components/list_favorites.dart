@@ -16,21 +16,48 @@ class ListFavorites extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return jsonObjects.isEmpty
-        ? const Center(
-            child: Text("Você ainda não adicionou nenhum favorito",
-                style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 15, 15, 15))),
+        ? Center(
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 150),
+                const Text(
+                  'Você ainda não adicionou',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const Text(
+                  'nenhum favorito',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const SizedBox(
+                  height: 80,
+                ),
+                SizedBox(
+                  height: 200,
+                  child: Image.asset(
+                    'assets/imagens/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                )
+              ],
+            ),
           )
         : ListView(children: <Widget>[
             const SizedBox(height: 20),
             const Center(
               child: Text("Lista de Favoritos",
-                  style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0))),
+                  style: TextStyle(
+                      fontSize: 20, color: Color.fromARGB(255, 0, 0, 0))),
             ),
             const SizedBox(height: 20),
             jsonObjects.isEmpty
                 ? const Center(
                     child: Text("Você ainda não adicionou nenhum favorito",
-                        style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 0, 0, 0))),
+                        style: TextStyle(
+                            fontSize: 20, color: Color.fromARGB(255, 0, 0, 0))),
                   )
                 : Column(
                     children: jsonObjects.map(
