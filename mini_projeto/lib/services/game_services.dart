@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../services/connection_service.dart';
+import 'dart:math';
 
 enum ConnectionStatus { loading, ready, error }
 
@@ -24,7 +25,7 @@ class GameService {
   GameService(this.numPagePad);
 
   Future<void> carregarJogos() async {
-    print('carregarJogos');
+    numPagePad = Random().nextInt(101);
 
     bool isConnected = await ConnectionService().isConnected();
 

@@ -8,7 +8,7 @@ import 'dart:math';
 
 import 'list_games.dart';
 
-final GameService gameService = GameService(Random().nextInt(1000));
+final GameService gameService = GameService(Random().nextInt(101));
 
 class TelaJogos extends HookWidget {
   TelaJogos({super.key});
@@ -74,9 +74,14 @@ class TelaJogos extends HookWidget {
                         );
                       })
                   : Container(),
+
           bottomNavigationBar: MyBottomNavBar(
             itemSelectedCallback: (index) {
               selectedIndex.value = index;
+              if (index == 0) {
+                gameService.carregarJogos();
+              }
+              
             },
           ),
         ));
