@@ -74,7 +74,7 @@ class _ConteudoCorpoState extends State<ConteudoCorpo> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    gameService.carregarDetalhesJogos();
+                    gameService.carregarDetalhesJogos(id);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

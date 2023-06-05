@@ -27,7 +27,7 @@ class GameService {
     'propertyNames': []
   });
 
-  int numPagePad = 1;
+  int numPagePad = Random().nextInt(101);
   String generoJogo = '';
 
   Future<void> carregarJogos(int valor) async {
@@ -68,7 +68,7 @@ class GameService {
     };
   }
 
-  Future<void> carregarDetalhesJogos() async {
+  Future<void> carregarDetalhesJogos(int idNovo) async {
     bool isConnected = await ConnectionService().isConnected();
 
     if (!isConnected) {
@@ -82,7 +82,7 @@ class GameService {
 
     var apiKey = '14e4419142c349faa4079c0243beb8f1';
 
-    String id = '12345';
+    int id = idNovo;
 
     var gamesUri = Uri(
       scheme: 'https',
