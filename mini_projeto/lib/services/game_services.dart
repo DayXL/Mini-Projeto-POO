@@ -20,6 +20,13 @@ class GameService {
     'propertyNames': ["name", "released", "background_image"]
   });
 
+  final ValueNotifier<Map<String, dynamic>> detalheGameStateNotifier =
+      ValueNotifier({
+    'status': ConnectionStatus.loading,
+    'dataObjects': [],
+    'propertyNames': []
+  });
+
   int numPagePad = 1;
   String generoJogo = '';
 
@@ -57,7 +64,44 @@ class GameService {
     gameStateNotifier.value = {
       'status': ConnectionStatus.ready,
       'dataObjects': gamesJson['results'],
-      'propertyNames': ['name', 'released', 'background_image']
+      'propertyNames': ['id', 'name', 'released', 'background_image']
+    };
+  }
+
+  Future<void> carregarDetalhesJogos() async {
+    bool isConnected = await ConnectionService().isConnected();
+
+    if (!isConnected) {
+      detalheGameStateNotifier.value = {
+        'status': ConnectionStatus.error,
+        'dataObjects': []
+      };
+
+      return;
+    }
+
+    var apiKey = '14e4419142c349faa4079c0243beb8f1';
+
+    String id = '12345';
+
+    var gamesUri = Uri(
+      scheme: 'https',
+      host: 'api.rawg.io',
+      path: 'api/games/$id',
+      queryParameters: {
+        'key': apiKey,
+      },
+    );
+
+    var jsonString = await http.read(gamesUri);
+    var gamesJson = jsonDecode(jsonString);
+
+    print("carregar $gamesJson");
+
+    detalheGameStateNotifier.value = {
+      'status': ConnectionStatus.ready,
+      'dataObjects': [gamesJson],
+      'propertyNames': ["description"]
     };
   }
 

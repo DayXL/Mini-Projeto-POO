@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import '../services/game_services.dart';
 import 'detalhes_jogos.dart';
+import 'tela_jogos.dart';
 
 class LoadGameList extends StatelessWidget {
   final List jsonObjects;
@@ -11,7 +11,7 @@ class LoadGameList extends StatelessWidget {
   const LoadGameList(
       {super.key,
       this.jsonObjects = const [],
-      this.propertyNames = const ["name", "style", "image_background"],
+      this.propertyNames = const ["id", "name", "released", "image_background"],
       required this.gameService});
 
   @override
@@ -43,7 +43,7 @@ class ConteudoCorpo extends StatefulWidget {
   const ConteudoCorpo({
     Key? key,
     this.jsonObjects = const [],
-    this.propertyNames = const ["name", "released", "background_image"],
+    this.propertyNames = const ["id", "name", "released", "background_image"],
     required this.gameService,
   }) : super(key: key);
 
@@ -51,14 +51,13 @@ class ConteudoCorpo extends StatefulWidget {
   _ConteudoCorpoState createState() => _ConteudoCorpoState();
 }
 
-
 class _ConteudoCorpoState extends State<ConteudoCorpo> {
-
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: widget.jsonObjects.map((jsonObject) {
+        final int id = jsonObject['id'] ?? '';
         final String text1 = jsonObject['name'] ?? '';
         final String imagem = jsonObject['background_image'] ?? '';
         final String text2 = jsonObject['released'] ?? '';
@@ -75,10 +74,11 @@ class _ConteudoCorpoState extends State<ConteudoCorpo> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
+                    gameService.carregarDetalhesJogos();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const DetalheJogos()),
+                          builder: (context) => DetalheTelaJogos(name: text1, id: id, imagem: imagem)),
                     );
                   },
                   child: SizedBox(

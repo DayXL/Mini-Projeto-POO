@@ -1,31 +1,117 @@
 import 'package:flutter/material.dart';
+import './tela_jogos.dart';
+import '../services/game_services.dart';
 
-class DetalheJogos extends StatelessWidget {
-  const DetalheJogos({super.key});
+class DetalheTelaJogos extends StatelessWidget {
+  final id;
+  final name;
+  final imagem;
+  DetalheTelaJogos({super.key, this.id, this.name, this.imagem});
+
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldMessenger(
+    return ScaffoldMessenger(
+        key: _scaffoldMessengerKey,
         child: Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: MyAppBar(),
-      ),
-      body: EstlFun(),
-    ));
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: MyAppBar(name: name),
+          ),
+          body: ValueListenableBuilder(
+              valueListenable: gameService.detalheGameStateNotifier,
+              builder: (_, value, __) {
+                if (value['status'] == ConnectionStatus.loading) {
+                  return Container(
+                      constraints: const BoxConstraints.expand(),
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.greenAccent, Colors.black],
+                          stops: [0.1, 0.3],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: const Center(
+                          child: SizedBox(child: CircularProgressIndicator())));
+                }
+
+                if (value['status'] == ConnectionStatus.error) {
+                  return const Center(
+                    child: Text('Erro ao carregar os dados'),
+                  );
+                }
+                return LoadDetalheGames(
+                  imagem: imagem,
+                  jsonObjects: value['dataObjects'],
+                  propertyNames: value['propertyNames'],
+                  gameService: gameService,
+                );
+              }),
+        ));
   }
 }
 
-class EstlFun extends StatefulWidget {
-  const EstlFun({Key? key}) : super(key: key);
+class LoadDetalheGames extends StatelessWidget {
+  final List jsonObjects;
+  final List propertyNames;
+  final GameService gameService;
+  final imagem;
 
-  @override
-  EstlFunState createState() => EstlFunState();
-}
+  const LoadDetalheGames(
+      {super.key,
+      this.jsonObjects = const [],
+      this.propertyNames = const ["description"],
+      required this.gameService,
+      this.imagem});
 
-class EstlFunState extends State<EstlFun> {
   @override
   Widget build(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints.expand(),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.greenAccent, Colors.black],
+          stops: [0.1, 0.3],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: ConteudoCorpoDetal(
+        imagem: imagem,
+        jsonObjects: jsonObjects,
+        gameService: gameService,
+      ),
+    );
+  }
+}
+
+class ConteudoCorpoDetal extends StatefulWidget {
+  final List jsonObjects;
+  final List<String> propertyNames;
+  final GameService gameService;
+  final imagem;
+
+  const ConteudoCorpoDetal(
+      {Key? key,
+      this.jsonObjects = const [],
+      this.propertyNames = const ["description"],
+      required this.gameService,
+      this.imagem})
+      : super(key: key);
+
+  @override
+  _ConteudoCorpoDetalState createState() => _ConteudoCorpoDetalState();
+}
+
+class _ConteudoCorpoDetalState extends State<ConteudoCorpoDetal> {
+  @override
+  Widget build(BuildContext context) {
+    var unformatedContent = widget.jsonObjects[0][widget.propertyNames[0]];
+    var formatedContent = unformatedContent.replaceAll("<br/>", " ");
+
     return Container(
         constraints: const BoxConstraints.expand(),
         decoration: const BoxDecoration(
@@ -36,76 +122,53 @@ class EstlFunState extends State<EstlFun> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      margin: const EdgeInsets.all(15.0),
-                      child: Stack(
-                        children: [
-                          Image.asset('assets/imagens/test_images/game.png'),
-                          Positioned(
-                            child: IconButton(
-                              icon:
-                                  const Icon(Icons.favorite_border, size: 50.0),
-                              color: Colors.red,
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
+        child: Column(children: [
+          Expanded(
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.all(15.0),
+                child: Stack(
+                  children: [
+                    Image.network(widget.imagem),
+                    Positioned(
+                      child: IconButton(
+                        icon: const Icon(Icons.favorite_border, size: 50.0),
+                        color: Colors.red,
+                        onPressed: () {},
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Card(
-                      child: Container(
-                        margin: const EdgeInsets.all(15.0),
-                        child: const Text(
-                          'Megaman Battle Network Legacy Collection A renomada série Mega Man Battle Network, que se expandiu para anime e quadrinhos, está de volta em Mega Man Battle Network Legacy Collection. Este pacote inclui dez jogos cheios de ação, além de novidades adicionais como uma galeria de ilustrações e música! Além disso, tem suporte a jogo online!',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          softWrap: true,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            Expanded(
-              flex: 1,
-              child: Card(
-                child: Container(
-                  margin: const EdgeInsets.all(16.0),
-                  child: const Text(
-                    'Megaman Battle Network Legacy Collection A renomada série Mega Man Battle Network, que se expandiu para anime e quadrinhos, está de volta em Mega Man Battle Network Legacy Collection. Este pacote inclui dez jogos cheios de ação, além de novidades adicionais como uma galeria de ilustrações e música! Além disso, tem suporte a jogo online! A renomada série Mega Man Battle Network, que se expandiu para anime e quadrinhos, está de volta em Mega Man Battle Network Legacy Collection. Este pacote inclui dez jogos cheios de ação, além de novidades adicionais como uma galeria de ilustrações e música! Além disso, tem suporte a jogo online!',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Card(
+              child: Container(
+                margin: const EdgeInsets.all(16.0),
+                child: Text(
+                  formatedContent,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-          ],
-        ));
+          ),
+        ]));
   }
 }
 
 class MyAppBar extends StatelessWidget {
-  const MyAppBar({Key? key}) : super(key: key);
+  final name;
+  const MyAppBar({super.key, this.name});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text("Megaman Battle Network Legacy Collection"),
+      title: Text(name),
       backgroundColor: Colors.greenAccent,
     );
   }
