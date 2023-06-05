@@ -35,24 +35,35 @@ class LoadGameList extends StatelessWidget {
   }
 }
 
-class ConteudoCorpo extends HookWidget {
+class ConteudoCorpo extends StatefulWidget {
   final List jsonObjects;
   final List<String> propertyNames;
   final GameService gameService;
 
-  const ConteudoCorpo(
-      {super.key,
-      this.jsonObjects = const [],
-      this.propertyNames = const ["name", "released", "background_image"],
-      required this.gameService});
+  const ConteudoCorpo({
+    Key? key,
+    this.jsonObjects = const [],
+    this.propertyNames = const ["name", "released", "background_image"],
+    required this.gameService,
+  }) : super(key: key);
+
+  @override
+  _ConteudoCorpoState createState() => _ConteudoCorpoState();
+}
+
+
+class _ConteudoCorpoState extends State<ConteudoCorpo> {
+
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: jsonObjects.map((jsonObject) {
+      children: widget.jsonObjects.map((jsonObject) {
         final String text1 = jsonObject['name'] ?? '';
         final String imagem = jsonObject['background_image'] ?? '';
         final String text2 = jsonObject['released'] ?? '';
+
+        bool isFavorite = widget.gameService.isFavorite(jsonObject['name']);
 
         return Container(
           margin: const EdgeInsets.all(16.0),
@@ -95,16 +106,25 @@ class ConteudoCorpo extends HookWidget {
                       ),
                       //add to favorites
                       IconButton(
-                          icon: Icon(Icons.favorite_border,
-                              color: gameService.isFavorite(jsonObject['name'])
-                                  ? Colors.red
-                                  : Colors.grey),
-                          onPressed: () {
-                            gameService.isFavorite(jsonObject['name'])
-                                ? gameService.removeFavorite(jsonObject['name'])
-                                : gameService.addFavorite(jsonObject['name'],
-                                    jsonObject['released'], imagem);
-                          }),
+                        icon: Icon(
+                          isFavorite ? Icons.favorite : Icons.favorite_border,
+                          color: isFavorite ? Colors.red : Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            if (isFavorite) {
+                              widget.gameService.removeFavorite(jsonObject['name']);
+                            } else {
+                              widget.gameService.addFavorite(
+                                jsonObject['name'],
+                                jsonObject['released'],
+                                imagem,
+                              );
+                            }
+                            isFavorite = !isFavorite;
+                          });
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -116,3 +136,4 @@ class ConteudoCorpo extends HookWidget {
     );
   }
 }
+
