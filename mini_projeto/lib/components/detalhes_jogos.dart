@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './tela_jogos.dart';
 import '../services/game_services.dart';
+import 'package:html/parser.dart';
 
 class DetalheTelaJogos extends StatelessWidget {
   final id;
@@ -110,10 +111,8 @@ class _ConteudoCorpoDetalState extends State<ConteudoCorpoDetal> {
   @override
   Widget build(BuildContext context) {
     var unformatedContent = widget.jsonObjects[0][widget.propertyNames[0]];
-    var formatedContent1 = unformatedContent.replaceAll("<br/>", "");
-    var formatedContent2 = formatedContent1.replaceAll("<br />", "");
-    var formatedContent3 = formatedContent2.replaceAll("<p>", "");
-    var formatedContent4 = formatedContent3.replaceAll("</p>", "");
+
+    String htmlText = parse(unformatedContent).body!.text;
 
     return Container(
         constraints: const BoxConstraints.expand(),
@@ -125,7 +124,6 @@ class _ConteudoCorpoDetalState extends State<ConteudoCorpoDetal> {
             end: Alignment.bottomCenter,
           ),
         ),
-        
         child: Column(children: [
           Expanded(
             child: Center(
@@ -146,15 +144,14 @@ class _ConteudoCorpoDetalState extends State<ConteudoCorpoDetal> {
               ),
             ),
           ),
-          
           Expanded(
             flex: 1,
-            child: ListView(
-              children: [Card(
+            child: ListView(children: [
+              Card(
                 child: Container(
                   margin: const EdgeInsets.all(16.0),
                   child: Text(
-                    formatedContent4,
+                    htmlText,
                     style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -162,8 +159,7 @@ class _ConteudoCorpoDetalState extends State<ConteudoCorpoDetal> {
                   ),
                 ),
               ),
-            ]
-            ),
+            ]),
           ),
         ]));
   }
