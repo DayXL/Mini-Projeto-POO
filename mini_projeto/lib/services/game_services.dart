@@ -17,7 +17,7 @@ class GameService {
       ValueNotifier({
     'status': ConnectionStatus.ready,
     'dataObjects': [],
-    'propertyNames': ["name", "released", "background_image"]
+    'propertyNames': ["name", "released", "background_image", "id"]
   });
 
   final ValueNotifier<Map<String, dynamic>> detalheGameStateNotifier =
@@ -96,8 +96,6 @@ class GameService {
     var jsonString = await http.read(gamesUri);
     var gamesJson = jsonDecode(jsonString);
 
-    print("carregar $gamesJson");
-
     detalheGameStateNotifier.value = {
       'status': ConnectionStatus.ready,
       'dataObjects': [gamesJson],
@@ -105,19 +103,21 @@ class GameService {
     };
   }
 
-  void addFavorite(String name, String released, String image) {
+  void addFavorite(String name, String released, String image, int id) {
     final List<Map<String, dynamic>> favorites =
         List.from(favoriteStateNotifier.value['dataObjects']);
     favorites.add({
       'name': name,
       'released': released,
       'background_image': image,
+      'id' : id,
+      
     });
 
     favoriteStateNotifier.value = {
       'status': ConnectionStatus.ready,
       'dataObjects': favorites,
-      'propertyNames': ['name', 'released', 'background_image']
+      'propertyNames': ['name', 'released', 'background_image', 'id']
     };
   }
 
@@ -136,7 +136,7 @@ class GameService {
       'status': ConnectionStatus.ready,
       'dataObjects':
           favorites.where((element) => element['name'] != name).toList(),
-      'propertyNames': ['name', 'released', 'background_image']
+      'propertyNames': ['name', 'released', 'background_image', 'id']
     };
   }
 

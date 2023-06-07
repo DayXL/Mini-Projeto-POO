@@ -119,6 +119,7 @@ class _ConteudoCorpoState extends State<ConteudoCorpo> {
                                 jsonObject['name'],
                                 jsonObject['released'],
                                 imagem,
+                                id,
                               );
                             }
                             isFavorite = !isFavorite;

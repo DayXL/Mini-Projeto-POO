@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import '../services/game_services.dart';
+import './detalhes_jogos.dart';
 
 class ListFavorites extends HookWidget {
   final List jsonObjects;
@@ -8,10 +9,10 @@ class ListFavorites extends HookWidget {
   final GameService gameService;
 
   const ListFavorites(
-      {super.key,
-      this.jsonObjects = const [],
-      this.propertyNames = const ["name", "released", "background_image"],
-      required this.gameService});
+    {super.key,
+    this.jsonObjects = const [],
+    this.propertyNames = const ["name", "released", "background_image", "id"],
+    required this.gameService});
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +73,22 @@ class ListFavorites extends HookWidget {
                     (jsonObject) {
                       return Card(
                         child: ListTile(
-                          leading: Image.network(
-                            jsonObject[propertyNames[2]],
-                            height: 150,
-                            scale: 0.4,
+                          leading: GestureDetector(
+                            onTap: () {
+                              gameService.carregarDetalhesJogos(jsonObject[propertyNames[3]]);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetalheTelaJogos(name: jsonObject[propertyNames[0]], id: jsonObject[propertyNames[3]], imagem: jsonObject[propertyNames[2]]),
+                              ));
+                            },
+                            child: Image.network(
+                              jsonObject[propertyNames[2]],
+                              height: 150,
+                              scale: 0.4,
+                            ),
                           ),
+
                           title: Text(jsonObject[propertyNames[0]]),
                           subtitle: Text(jsonObject[propertyNames[1]]),
                           trailing: IconButton(
