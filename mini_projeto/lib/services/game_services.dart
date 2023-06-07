@@ -54,7 +54,7 @@ class GameService {
         'key': apiKey,
         'size': '9',
         'page': '$numPagePad',
-        if (generoJogo.isNotEmpty) 'genres': generoJogo,
+        if (generoJogo != '') 'genres': generoJogo,
       },
     );
 
@@ -141,7 +141,14 @@ class GameService {
   }
 
   void mudarGenero(int genreId) {
-    generoJogo = '$genreId';
+    if (genreId == -1) {
+      generoJogo = '';
+    }
+    else 
+    {
+      generoJogo = '$genreId';
+    }
+
     carregarJogos(Random().nextInt(101));
   }
 }

@@ -69,6 +69,12 @@ class MyAppBar extends StatelessWidget {
 String generosJogos = '''
 [
     {
+      "id": -1,
+      "name": "Limpar",
+      "icon": "icons/action.png"
+    },
+
+    {
       "id": 4,
       "name": "Action",
       "icon": "icons/action.png"
@@ -152,6 +158,7 @@ String generosJogos = '''
 ''';
 
 const List<IconData> generosIcons = [
+  Icons.delete,
   Icons.directions_run, // Action
   Icons.emoji_objects, // Indie
   Icons.explore, // Adventure
