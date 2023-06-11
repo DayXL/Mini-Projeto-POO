@@ -18,6 +18,7 @@ Para executar este projeto, siga as seguintes instruções:
 - No terminal do Visual Studio Code, acesse a raiz do projeto "/Mini-Projeto-POO/mini_projeto" e rode os seguinte comandos
 
 "flutter packages get"
+
 "flutter packages upgrade"
 
 - Rode o projeto (de preferência com interface de celular)
