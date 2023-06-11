@@ -129,18 +129,8 @@ class _ConteudoCorpoDetalState extends State<ConteudoCorpoDetal> {
             child: Center(
               child: Container(
                 margin: const EdgeInsets.all(15.0),
-                child: Stack(
-                  children: [
-                    Image.network(widget.imagem),
-                    Positioned(
-                      child: IconButton(
-                        icon: const Icon(Icons.favorite_border, size: 50.0),
-                        color: Colors.red,
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
+                child: Image.network(widget.imagem),
+                    
               ),
             ),
           ),
